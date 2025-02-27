@@ -1,0 +1,345 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;  /* Maximale Höhe */
+  overflow-x: hidden; /* Kein horizontales Scrollen */
+  overflow-y: scroll; /* Vertikales Scrollen aktiv, aber begrenzt */
+}
+body {
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Mindestens die volle Bildschirmhöhe */
+  font-family: 'Avenir Next', sans-serif; 
+  color: #282120;
+  background-color: #efe7da; 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  letter-spacing: -0.3px;
+  text-transform: lowercase;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  max-height: 80vh;
+}
+
+.container {
+  scroll-snap-align: start;
+  flex-grow: 1; /* Container füllt den restlichen Platz */
+  padding: 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+
+nav {
+  position: absolute; /* Damit die Navigation an einer festen Stelle bleibt */
+  top: 20px; /* Abstand von oben */
+  left: 20px; /* Abstand von links */
+}
+
+nav ul {
+  list-style-type: none; /* Entfernt die Standard-Aufzählungszeichen */
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #282120;
+  font-weight: 600;
+}
+
+nav a:hover {
+  font-weight: lighter; 
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+footer {
+  position: fixed;           /* Footer bleibt immer sichtbar */
+  bottom: 0;                 /* Am unteren Rand ausrichten */
+  right: 0;                  /* Am rechten Rand ausrichten */
+  padding: 10px 20px;        /* Innenabstand für Luft */
+  background-color: rgba(239, 231, 218, 0.8); /* Hintergrundfarbe */
+  font-size: 14px;           /* Textgröße */
+  text-align: right;         /* Text rechtsbündig ausrichten */
+}
+
+.footer-item {
+  margin: 0 10px; /* Abstände zwischen den Elementen */
+  display: inline-block; /* Alle Elemente in einer Zeile lassen */
+}
+
+footer a {
+  text-decoration: none; /* Unterstreichung entfernen */
+  font-weight: normal;   /* Standardgewicht */
+  transition: font-weight 0.2s ease; /* Sanfter Übergang beim Hover */
+  color: #282120;
+}
+
+footer a:hover {
+  font-weight: bold; /* Schrift wird beim Hover fett */
+}
+
+
+.logo-container {
+  position: absolute;
+  top: 92%; 
+  left: 13%;
+  transform: translate(-50%, -50%);
+  opacity: 90%;
+  z-index: 100;
+}
+
+.logo {
+  width: 300px; /* Größe des Logos anpassen */
+  height: auto;
+  opacity: 1;
+  z-index: 10;
+  transition: opacity 0.1s ease;
+}
+
+.logo:hover {
+  opacity: 60%;
+}
+
+#loading-animation {
+  width: 800px;         /* Größe des GIF anpassen */
+  height: 800px;        /* Größe des GIF anpassen */
+  position: fixed;      /* Fixed, damit es relativ zum gesamten Viewport positioniert wird */
+  top: 50%;             /* Vertikal zentrieren */
+  left: 70%;            /* Horizontal zentrieren */
+  transform: translate(-50%, -50%); /* Korrektur der Position für exakte Mitte */
+  display: none;        /* GIF standardmäßig ausblenden */
+  z-index: 1000;        /* Sicherstellen, dass es über anderen Elementen liegt */
+}
+
+#loading-animation img {
+  width: 100%;          /* Bildgröße auf Containergröße anpassen */
+  height: 100%;         /* Bildhöhe auf Containerhöhe anpassen */
+}
+
+/* Wenn die Maus über das Logo fährt, das GIF anzeigen */
+.logo-container:hover ~ #loading-animation {
+  display: block;       /* GIF anzeigen bei Hover über das Logo */
+}
+
+/* Wenn die Maus über einen Footer-Link fährt, das GIF anzeigen */
+footer a:hover ~ .logo-container #loading-animation {
+  display: block;       /* GIF anzeigen bei Hover über einen Footer-Link */
+}
+
+nav a:hover ~ #loading-animation {
+  display: block;
+}
+
+.editing-page {
+  background-image: url('MAT/Starblurbackground-03.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Hier kannfst du auch zusätzliche Styles hinzufügen, z.B. für die .background-image */
+.background-image {
+  display: block;
+  width: 500%;
+  height: 900vh;
+  position: absolute;
+  top: -12%;
+  left: 18%;
+  z-index: -4; /* Das Bild bleibt hinter dem Inhalt */
+  overflow: hidden;
+}
+
+.bg-image {
+  width: 13%; /* Das Bild füllt die gesamte Breite des Containers aus */
+  height: 13%; /* Das Bild füllt die gesamte Höhe des Containers aus */
+  object-fit: cover; /* Bild wird skaliert, um den Container auszufüllen, ohne verzerrt zu werden */
+}
+
+.video-container {
+  position: absolute; /* Fixiert das Video im Viewport */
+  top: 50%;        /* Zentriert vertikal */
+  left: 50%;       /* Zentriert horizontal */
+  transform: translate(-50%, -50%); /* Genau zentriert anhand des Mittelpunkts */
+  width: 90vw;     /* 60% der Bildschirmbreite */
+  height: 90vh;    /* 60% der Bildschirmhöhe */
+  z-index: -1;      /* Hinter allen anderen Elementen */
+  pointer-events: none; /* Klicks durchlassen */
+  overflow: hidden;
+}
+
+.background-video {
+  width: 100%;         /* Passt das Video an die Containergröße an */
+  height: 100%;        /* Passt das Video an die Containerhöhe an */
+  object-fit: contain; /* Video wird nicht beschnitten und bleibt proportional */
+}
+
+.content-wrapper {
+  display: flex;       /* Flexbox für Layout */
+  gap: 40px;           /* Abstand zwischen Lebenslauf und Bild */
+  align-items: flex-start;
+}
+
+/* Allgemeine Überschrift (h1, h2, h3) - mit unterschiedlichem Gewicht */
+h1, h2, h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Absätze - gleiche Schriftgröße wie der Standard-Text */
+p { 
+  padding: 0;
+  font-size: 1rem; /* Einheitliche Schriftgröße für Textabsätze */
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+
+.resume {
+  flex: 1;             /* Lebenslauf nimmt den verfügbaren Platz links ein */
+  font-size: 16px;
+  line-height: 1.6;
+  color: #282120;
+}
+
+/* Resume Abschnitt */
+.resume {
+  padding: 40px; /* Mehr Abstand von den Rändern */
+  margin-left: 250px; /* Abstand links */
+  margin-right: 50px; /* Abstand rechts */
+  max-width: 500px; /* Maximale Breite für bessere Lesbarkeit */
+  background-color: #ffffff; /* Weißer Hintergrund für den Block */
+  border-left: 1px solid #282120; /* Ein schmaler, schwarzer Strich links */
+  border-right: 1px solid #282120; /* Ein schmaler, schwarzer Strich rechts */
+  margin-top: 0px; /* Abstand nach oben */
+  margin-bottom: 10px; /* Abstand nach unten */
+  line-height: 1.6; /* Erhöhte Zeilenhöhe für bessere Lesbarkeit */
+  z-index: -11;
+}
+
+/* Optional: Hover-Effekt für Absätze, um Interaktivität hinzuzufügen */
+.resume p:hover {
+  background-color: #282120; /* Leichter Hover-Effekt */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.about-me {
+  position: absolute;       /* Absolute Position innerhalb des übergeordneten Elements */
+  top: 0;                   /* Ganz oben */
+  right: 0;                 /* Ganz rechts */
+  width: auto;              /* Automatische Breite entsprechend Inhalt */
+  height: auto;             /* Automatische Höhe entsprechend Inhalt */
+  padding: 20px;            /* Abstand von den Rändern */
+  z-index: 10;              /* Sicherstellen, dass der Container im Vordergrund ist */
+}
+
+.portrait-container {
+  text-align: right;        /* Text rechtsbündig */
+  width: 300px;             /* Feste Breite für Bild und Text */
+  margin: 0 auto;
+}
+
+.portrait {
+  width: 70%;              /* Bild passt sich Containerbreite an */
+  height: auto;             /* Proportionale Höhe */
+  margin-bottom: -5px;      /* Abstand zum Untertitel */
+}
+
+.subtitle {
+  font-size: 16px;          /* Schriftgröße */
+  font-style: normal;       /* Kursiv */
+  color: #282120;           /* Farbe */
+  text-align: right;
+}
+
+.skills-block {
+  text-align: right;      
+  font-size: 16px;          /* Schriftgröße */
+  line-height: 1.6;         /* Zeilenhöhe */
+  color: #282120;              /* Textfarbe */
+  width: 100%;              /* Gleiche Breite wie das Bild */
+}
+.graphic-design {
+  display: flex;
+  justify-content: center; /* Zentriert die Logos horizontal */
+  align-items: center; /* Zentriert die Logos vertikal */
+  gap: 120px; /* Gleicher Abstand zwischen den Logos */
+  height: 100vh; /* Nimmt die volle Höhe des Viewports ein */
+  margin: 0 auto; /* Zentrierung */
+}
+
+.logo-item {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+}
+
+.insta-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.insta-logo:hover {
+  transform: scale(1.1); /* Zoom-Effekt beim Hover */
+}
+
+.posts-overlay img {
+  width: 300px; /* Breite der kleinen Posts */
+  height: 300px; /* Höhe der kleinen Posts */
+  object-fit: cover; /* Beibehaltung des Seitenverhältnisses */
+  border-radius: 8px; /* Abgerundete Ecken */
+  left: -100px;
+}
+
+.posts-overlay {
+  position: absolute;
+  bottom: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 10;
+}
+
+.logo-item:hover .posts-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.special-overlay {
+  flex-direction: column; /* Vertikale Ausrichtung */
+  gap: 10px; /* Größerer Abstand zwischen den Bildern */
+  align-items: flex-end; /* Bilder rechtsbündig ausrichten */
+  transform: translateY(-200px); /* Zentrierung aufheben */
+  right: -160px; /* Leicht nach rechts verschieben */
+  left: auto; /* Linke Position ignorieren */
+  width: 400px;
+  height: 400px;
+}
