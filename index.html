@@ -6,6 +6,7 @@
   <title>Portfolio</title>
   <link rel="stylesheet" href="StylePortfolio.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="MAT/StaranimationGIF.gif" as="image">
 </head>
 <body>
 
@@ -24,13 +25,14 @@
     </div>
 
     <div id="loading-animation">
+      
       <img src="MAT/StaranimationGIF.gif" alt="Loading Animation" />
     </div>
 
     <footer>
       <section id="contact">
         <p class="footer-item">e-mail: <a href="mailto:nadialitzenburger@gmail.com">nadialitzenburger@gmail.com</a></p>
-        <p class="footer-item">phone: <a href="tel:+49123456789">+49 174 2426600</a></p>
+        <p class="footer-item">phone: <a href="tel:+491742426600">+49 174 2426600</a></p>
         <p class="footer-item">&copy; 2025 Nadia Litzenburger</p>
       </section>
     </footer>
@@ -39,45 +41,56 @@
 </html>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-  const logoContainer = document.querySelector('.logo-container');
-  const footerLinks = document.querySelectorAll('footer a');
-  const loadingAnimation = document.getElementById('loading-animation');
-  const navLinks = document.querySelectorAll('nav a');
-  
-  // Zeige das GIF an, wenn über Logo oder Footer-Link gehovt wird
-  logoContainer.addEventListener('mouseover', function() {
-    loadingAnimation.style.display = 'block';
-  });
+  document.addEventListener('DOMContentLoaded', function() {
+    const logoContainer = document.querySelector('.logo-container');
+    const footerLinks = document.querySelectorAll('footer a');
+    const loadingAnimation = document.getElementById('loading-animation');
+    const navLinks = document.querySelectorAll('nav a');
+    
+    // Zeige das GIF an, wenn über Logo oder Footer-Link gehovt wird
+    logoContainer.addEventListener('mouseover', function() {
+      setTimeout(function() {
+        loadingAnimation.style.display = 'block';
+      }, 100); // 100ms delay
+    });
 
-  footerLinks.forEach(link => {
-    link.addEventListener('mouseover', function() {
-      loadingAnimation.style.display = 'block';
+    footerLinks.forEach(link => {
+      link.addEventListener('mouseover', function() {
+        setTimeout(function() {
+          loadingAnimation.style.display = 'block';
+        }, 100);
+      });
+    });
+
+    navLinks.forEach(link => { // Für alle Navigation-Links
+      link.addEventListener('mouseover', function() {
+        setTimeout(function() {
+          loadingAnimation.style.display = 'block';
+        }, 100); // 100ms delay
+      });
+    });
+
+    // Verstecke das GIF, wenn die Maus nicht mehr über dem Logo oder Footer-Link ist
+    logoContainer.addEventListener('mouseout', function() {
+      setTimeout(function() {
+        loadingAnimation.style.display = 'none';
+      }, 100); // 100ms delay
+    });
+
+    footerLinks.forEach(link => {
+      link.addEventListener('mouseout', function() {
+        setTimeout(function() {
+          loadingAnimation.style.display = 'none';
+        }, 100); // 100ms delay
+      });
+    });
+    
+    navLinks.forEach(link => { // Für alle Navigation-Links
+      link.addEventListener('mouseout', function() {
+        setTimeout(function() {
+          loadingAnimation.style.display = 'none';
+        }, 100); // 100ms delay
+      });
     });
   });
-
-  navLinks.forEach(link => { // Für alle Navigation-Links
-    link.addEventListener('mouseover', function() {
-      loadingAnimation.style.display = 'block';
-    });
-  });
-
-  // Verstecke das GIF, wenn die Maus nicht mehr über dem Logo oder Footer-Link ist
-  logoContainer.addEventListener('mouseout', function() {
-    loadingAnimation.style.display = 'none';
-  });
-
-  footerLinks.forEach(link => {
-    link.addEventListener('mouseout', function() {
-      loadingAnimation.style.display = 'none';
-    });
-  });
-
-navLinks.forEach(link => { // Für alle Navigation-Links
-    link.addEventListener('mouseout', function() {
-      loadingAnimation.style.display = 'none';
-    });
-  });
-}); 
-
 </script>
